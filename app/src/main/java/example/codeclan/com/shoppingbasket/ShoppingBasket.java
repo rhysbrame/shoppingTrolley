@@ -28,9 +28,33 @@ public class ShoppingBasket {
         return trolley.size();
     }
 
+    public void emptyTrolley(){
+        trolley.clear();
+    }
+
+    public Item findItemByIndex(int index){
+        Item indexItem = trolley.get(index);
+        return indexItem;
+    }
+
     public void removeItemByIndex(int index){
         trolley.remove(index);
     }
 
-//  TODO  public void removeItemByName(Item item)
+    // TODO do i need this...
+    public Item listItems(){
+        for ( Item itemList : trolley ) {
+            return itemList;
+        }
+        return null;
+    }
+
+    public Item findItemByName(String name){
+
+    }
+
+    // TODO public void removeItemByName(Item item)
+    public void removeItemByName(){
+
+    }
 }

@@ -2,59 +2,83 @@ package example.codeclan.com.shoppingbasket;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static example.codeclan.com.shoppingbasket.ItemType.*;
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertNull;
 
 public class ShoppingBasketTest {
 
     ShoppingBasket newShoppingBasket;
-    Item newItem;
+    Item newItem1;Item newItem2;Item newItem3;Item newItem4;Item newItem5;
 
     @Before
     public void before(){
-        newShoppingBasket = new ShoppingBasket(1);
-        newItem = new Item(DAIRY, 0.99, "milk");
-
+        newShoppingBasket = new ShoppingBasket(12);
+        newItem1 = new Item(DAIRY, 0.99, "milk");
+        newItem2 = new Item(BUTCHERS, 4.99, "meat");
+        newItem3 = new Item (FISH, 2.45, "shark");
+        newItem4 = new Item (DRY, 2.00, "papers");
+        newItem5 = new Item (BAKERY, 1.00, "bread");
     }
 
     @Test
     public void testShoppingBasketNumber(){
-        assertEquals(1, newShoppingBasket.getBasketNumber());
-        newShoppingBasket.setBasketNumber(2);
-        assertEquals(2, newShoppingBasket.getBasketNumber());
+        assertEquals(12, newShoppingBasket.getBasketNumber());
+        newShoppingBasket.setBasketNumber(22);
+        assertEquals(22, newShoppingBasket.getBasketNumber());
     }
 
     @Test
     public void testAddItem(){
-        newShoppingBasket.addItem(newItem);
+        newShoppingBasket.addItem(newItem1);
         assertEquals(1, newShoppingBasket.checkTrolleySize());
     }
 
     @Test
-    public void testAdd3Items(){
-        newShoppingBasket.addItem(newItem);
-        newShoppingBasket.addItem(newItem);
-        newShoppingBasket.addItem(newItem);
+    public void testAddMultipleItems(){
+        newShoppingBasket.addItem(newItem1);
+        newShoppingBasket.addItem(newItem2);
+        newShoppingBasket.addItem(newItem3);
         assertEquals(3, newShoppingBasket.checkTrolleySize());
     }
 
     @Test
+    public void testEmptyTrolley(){
+        newShoppingBasket.addItem(newItem1);
+        newShoppingBasket.addItem(newItem2);
+        newShoppingBasket.addItem(newItem3);
+        assertEquals(3, newShoppingBasket.checkTrolleySize());
+        newShoppingBasket.emptyTrolley();
+        assertEquals(0, newShoppingBasket.checkTrolleySize());
+    }
+
+    @Test
+    public void testFindItemByIndex(){
+        newShoppingBasket.addItem(newItem1);
+        assertEquals(newItem1, newShoppingBasket.findItemByIndex(0));
+        newShoppingBasket.addItem(newItem2);
+        newShoppingBasket.addItem(newItem3);
+        String itemName = newShoppingBasket.findItemByIndex(2).getItemName();
+        assertEquals("shark", itemName);
+    }
+
+    @Test
     public void testRemoveItemByIndex(){
-        newShoppingBasket.addItem(newItem);
-        newShoppingBasket.addItem(newItem);
-        newShoppingBasket.addItem(newItem);
-        newShoppingBasket.addItem(newItem);
-        newShoppingBasket.addItem(newItem);
+        newShoppingBasket.addItem(newItem1);
+        newShoppingBasket.addItem(newItem2);
+        newShoppingBasket.addItem(newItem3);
+        newShoppingBasket.addItem(newItem4);
+        newShoppingBasket.addItem(newItem5);
         assertEquals(5, newShoppingBasket.checkTrolleySize());
 
         newShoppingBasket.removeItemByIndex(0);
         assertEquals(4, newShoppingBasket.checkTrolleySize());
-
-        //TODO increase the testing on this part, so that we can prove that the methods are actually doing what i want them to do.
     }
 
-
+    @Test
+    public void testFindItemByName(){
+        newShoppingBasket.addItem(newItem5);
+        assertEquals("bread", newShoppingBasket.findItemByName("bread"));
+    }
 }
