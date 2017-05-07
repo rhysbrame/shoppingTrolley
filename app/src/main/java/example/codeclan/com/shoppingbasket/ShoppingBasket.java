@@ -11,7 +11,7 @@ public class ShoppingBasket {
         this.basketNumber = basketNumber;
         this.trolley = new ArrayList<>();
     }
-
+// get and set the basket number in case i want to make a shop class
     public void setBasketNumber(int number){
         basketNumber = number;
     }
@@ -19,42 +19,47 @@ public class ShoppingBasket {
     public int getBasketNumber(){
         return basketNumber;
     }
-
+// add an item into the array list trolley
     public void addItem(Item item){
         trolley.add(item);
     }
-
+// checking the size via the common .size method that belongs to the list array class
     public int checkTrolleySize(){
         return trolley.size();
     }
-
+// clearing the trolley via .clear method
     public void emptyTrolley(){
         trolley.clear();
     }
-
-    public Item findItemByIndex(int index){
+// find an item by index and also removing the item via the index
+    public String findItemByIndex(int index){
         Item indexItem = trolley.get(index);
-        return indexItem;
+        return indexItem.getItemName();
     }
 
     public void removeItemByIndex(int index){
         trolley.remove(index);
     }
 
-    // TODO do i need this...
-    public Item listItems(){
-        for ( Item itemList : trolley ) {
-            return itemList;
+    public String findItemByName(String itemName){
+        for (Item individualItem : trolley){
+            if (individualItem.getItemName() == itemName){
+                return individualItem.getItemName();
+            }
         }
         return null;
     }
 
-    public Item findItemByName(String name){
-
+    public int getIndex(Item item){
+        return trolley.indexOf(item);
     }
 
-    // TODO public void removeItemByName(Item item)
-    public void removeItemByName(){
-
+    public void removeItemByName(String itemName){
+        for (Item individualItem : trolley){
+            if (individualItem.getItemName() == itemName){
+                int index = getIndex(individualItem);
+                trolley.remove(index);
+            }
+        }
     }
 }

@@ -2,10 +2,11 @@ package example.codeclan.com.shoppingbasket;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import static example.codeclan.com.shoppingbasket.ItemType.*;
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNull;
 
 public class ShoppingBasketTest {
 
@@ -56,10 +57,10 @@ public class ShoppingBasketTest {
     @Test
     public void testFindItemByIndex(){
         newShoppingBasket.addItem(newItem1);
-        assertEquals(newItem1, newShoppingBasket.findItemByIndex(0));
+        assertEquals("milk", newShoppingBasket.findItemByIndex(0));
         newShoppingBasket.addItem(newItem2);
         newShoppingBasket.addItem(newItem3);
-        String itemName = newShoppingBasket.findItemByIndex(2).getItemName();
+        String itemName = newShoppingBasket.findItemByIndex(2);
         assertEquals("shark", itemName);
     }
 
@@ -80,5 +81,22 @@ public class ShoppingBasketTest {
     public void testFindItemByName(){
         newShoppingBasket.addItem(newItem5);
         assertEquals("bread", newShoppingBasket.findItemByName("bread"));
+    }
+
+    @Test
+    public void testGetIndex(){
+        newShoppingBasket.addItem(newItem1);
+        newShoppingBasket.addItem(newItem2);
+        newShoppingBasket.addItem(newItem3);
+        assertEquals(2,newShoppingBasket.getIndex(newItem3));
+    }
+
+    @Test
+    public void testRemoveItemByName(){
+        newShoppingBasket.addItem(newItem1);
+        newShoppingBasket.addItem(newItem2);
+        newShoppingBasket.addItem(newItem3);
+        newShoppingBasket.removeItemByName("meat");
+        assertEquals(null, newShoppingBasket.findItemByName("meat"));
     }
 }
