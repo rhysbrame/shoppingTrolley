@@ -11,7 +11,7 @@ public class ShoppingBasket {
         this.basketNumber = basketNumber;
         this.trolley = new ArrayList<>();
     }
-// get and set the basket number in case i want to make a shop class
+
     public void setBasketNumber(int number){
         basketNumber = number;
     }
@@ -19,19 +19,30 @@ public class ShoppingBasket {
     public int getBasketNumber(){
         return basketNumber;
     }
-// add an item into the array list trolley
+
     public void addItem(Item item){
         trolley.add(item);
     }
-// checking the size via the common .size method that belongs to the list array class
+
+    public Item getItem() {
+        for (Item item : trolley) {
+            return item;
+        }
+        return null;
+    }
+
     public int checkTrolleySize(){
         return trolley.size();
     }
-// clearing the trolley via .clear method
+
     public void emptyTrolley(){
         trolley.clear();
     }
-// find an item by index and also removing the item via the index
+
+    public int getIndex(Item item){
+        return trolley.indexOf(item);
+    }
+
     public String findItemByIndex(int index){
         Item indexItem = trolley.get(index);
         return indexItem.getItemName();
@@ -50,10 +61,6 @@ public class ShoppingBasket {
         return null;
     }
 
-    public int getIndex(Item item){
-        return trolley.indexOf(item);
-    }
-
     public void removeItemByName(String itemName){
         for (Item individualItem : trolley){
             if (individualItem.getItemName() == itemName){
@@ -61,5 +68,14 @@ public class ShoppingBasket {
                 trolley.remove(index);
             }
         }
+    }
+
+    public double getTrolleyTotal(){
+        double total = 0.00;
+        for (Item item : trolley){
+            double itemCost = item.getItemCost();
+            total = total + itemCost;
+    }
+        return total;
     }
 }

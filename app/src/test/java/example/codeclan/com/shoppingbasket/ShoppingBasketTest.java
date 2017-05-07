@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import static example.codeclan.com.shoppingbasket.ItemType.*;
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNull;
 
 public class ShoppingBasketTest {
@@ -42,6 +41,13 @@ public class ShoppingBasketTest {
         newShoppingBasket.addItem(newItem2);
         newShoppingBasket.addItem(newItem3);
         assertEquals(3, newShoppingBasket.checkTrolleySize());
+    }
+
+    @Test
+    public void testGetItem(){
+        newShoppingBasket.addItem(newItem1);
+        newShoppingBasket.addItem(newItem2);
+        assertEquals(newItem2, newShoppingBasket.getItem());
     }
 
     @Test
@@ -97,6 +103,14 @@ public class ShoppingBasketTest {
         newShoppingBasket.addItem(newItem2);
         newShoppingBasket.addItem(newItem3);
         newShoppingBasket.removeItemByName("meat");
-        assertEquals(null, newShoppingBasket.findItemByName("meat"));
+        assertNull(newShoppingBasket.findItemByName("meat"));
+    }
+
+    @Test
+    public void testGetTrolleyTotal() {
+        newShoppingBasket.addItem(newItem1);
+        newShoppingBasket.addItem(newItem2);
+        newShoppingBasket.addItem(newItem3);
+        assertEquals(8.43, newShoppingBasket.getTrolleyTotal());
     }
 }
