@@ -78,4 +78,9 @@ public class ShoppingBasket {
     }
         return total;
     }
+
+    public ArrayList<Item> getTrolley(){
+        return new ArrayList<>(trolley);
+    }
+
 }

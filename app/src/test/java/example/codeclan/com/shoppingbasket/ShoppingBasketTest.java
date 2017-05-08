@@ -47,7 +47,7 @@ public class ShoppingBasketTest {
     public void testGetItem(){
         newShoppingBasket.addItem(newItem1);
         newShoppingBasket.addItem(newItem2);
-        assertEquals(newItem2, newShoppingBasket.getItem());
+        assertEquals(newItem1, newShoppingBasket.getItem());
     }
 
     @Test
